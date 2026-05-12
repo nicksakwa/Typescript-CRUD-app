@@ -85,41 +85,6 @@ Runs the console demo with auto-reload on file changes.
 - **@types/node** (^25.7.0) - TypeScript definitions for Node.js
 - **ts-node** (^10.9.2) - TypeScript execution (alternative)
 
-## 🏗️ Project Structure
-
-```
-typescript-CRUD-app/
-├── src/
-│   ├── app.ts                      # Console demo entry point
-│   ├── server.ts                   # Express web server
-│   ├── core/
-│   │   └── repository.interface.ts # Generic repository interface
-│   ├── features/
-│   │   └── users/
-│   │       ├── index.ts            # Public API (barrel export)
-│   │       └── user.repository.ts  # User data operations
-│   └── types/
-│       └── user.types.ts           # User type definitions
-├── public/
-│   └── index.html                  # Web UI
-├── docs/
-│   ├── system-architecture-and-design.md
-│   └── technical-reference-manual.md
-├── package.json
-├── tsconfig.json
-└── README.md
-```
-
-## 🌐 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/users` | Retrieve all users |
-| GET | `/api/users/:id` | Retrieve user by ID |
-| POST | `/api/users` | Create new user |
-| PUT | `/api/users/:id` | Update existing user |
-| DELETE | `/api/users/:id` | Delete user |
-
 ## Logging
 
 The server includes comprehensive logging for debugging:
@@ -162,14 +127,6 @@ For detailed technical information, see:
 - **Strict Mode**: Enabled
 - **Module Detection**: Force (all files are modules)
 - **Verbatim Module Syntax**: Enforced
-
-## 🤝 Contributing
-
-This is an educational project. Feel free to:
-- Fork and experiment
-- Add new features
-- Improve documentation
-- Share feedback
 
 ##  Key Takeaways
 
