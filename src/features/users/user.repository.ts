@@ -43,4 +43,28 @@ export class UserRepository implements IRepository<User> {
         // If input is invalid, throw an error
         throw new Error('invalid user data');
     }
+
+    async update(id: string, input: unknown): Promise<User | null> {
+        const userIndex = this.users.findIndex(u => u.id === id);
+        if (userIndex === -1) return null;
+
+        if (typeof input === 'object' && input !== null) {
+            const updates = input as Partial<CreateUserDto>;
+            const existingUser = this.users[userIndex];
+            if (!existingUser) return null;
+            
+            this.users[userIndex] = {
+                ...existingUser,
+                ...updates
+            };
+            return this.users[userIndex]!;
+        }
+        throw new Error('invalid update data');
+    }
+
+    async delete(id: string): Promise<boolean> {
+        const initialLength = this.users.length;
+        this.users = this.users.filter(u => u.id !== id);
+        return this.users.length < initialLength;
+    }
 }

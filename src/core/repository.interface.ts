@@ -13,15 +13,9 @@
 // <T> is a placeholder - it gets replaced with the actual type when used.
 // Think of it like a function parameter, but for types!
 export interface IRepository<T> {
-    // Returns all items of type T
     getAll(): Promise<T[]>;
-    
-    // Returns a single item or null if not found
-    // T | null is a UNION TYPE (value can be T OR null)
     getById(id: string): Promise<T | null>;
-    
-    // Creates a new item and returns it
-    // Using 'any' here is BAD practice (defeats type safety)
-    // We'll improve this in the implementation using 'unknown'
     create(data: any): Promise<T>;
+    update(id: string, data: any): Promise<T | null>;
+    delete(id: string): Promise<boolean>;
 }
