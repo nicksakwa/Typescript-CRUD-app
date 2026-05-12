@@ -561,6 +561,37 @@ if (deleted) {
 
 ### File: `src/server.ts`
 
+#### Logging System
+
+```typescript
+function log(message: string, data?: any) {
+    const timestamp = new Date().toISOString();
+    const logMessage = `[${timestamp}] ${message}${data ? ' ' + JSON.stringify(data, null, 2) : ''}\n`;
+    console.log(logMessage);
+    appendFileSync(logFile, logMessage);
+}
+```
+
+**Description**: Centralized logging function for debugging and monitoring.
+
+**Parameters**:
+- `message: string` - Log message text
+- `data?: any` - Optional data to log (converted to JSON)
+
+**Behavior**:
+- Adds ISO timestamp to each log entry
+- Writes to both console and `server.log` file
+- Pretty-prints JSON data with 2-space indentation
+
+**Usage**:
+```typescript
+log('User created', { userId: '123', name: 'Alice' });
+log('Server starting');
+log('Error occurred', error);
+```
+
+---
+
 #### Express Application Setup
 
 ```typescript
@@ -568,15 +599,21 @@ const app = express();
 const repo = new UserRepository();
 const PORT = 3000;
 
+app.use((req, res, next) => {
+    log(`Incoming ${req.method} ${req.url}`);
+    next();
+});
+
 app.use(express.json());
 app.use(express.static(join(__dirname, '../public')));
 ```
 
-**Description**: Initializes Express server with middleware.
+**Description**: Initializes Express server with middleware and logging.
 
 **Components**:
 - `express()` - Creates Express application
 - `new UserRepository()` - Creates repository instance
+- Logging middleware - Logs all incoming requests
 - `express.json()` - Parses JSON request bodies
 - `express.static()` - Serves static files from public folder
 

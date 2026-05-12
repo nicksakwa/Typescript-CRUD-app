@@ -201,6 +201,14 @@ export * from '../../types/user.types';
 - Response formatting
 - Error handling
 - Static file serving
+- Request/response logging
+
+**Logging System**:
+- Dual logging (console + file)
+- Timestamps on all log entries
+- Request tracking with method, URL, and body
+- Error tracking with stack traces
+- Log file: `server.log`
 
 **Endpoint Structure**:
 ```typescript
